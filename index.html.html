@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mundo Oscuro | Outlet</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,500;0,700;1,500&family=Manrope:wght@400;600;700&family=Syne:wght@700;800&family=Cormorant+Garamond:ital,wght@1,700&display=swap">
+<style>
+:root{color-scheme:dark;--bg:#0a0709;--card:#150f13;--line:#2e2228;--text:#f4ece6;--muted:#a8979a;--gold:#d4b078;--wa:#25a244;
+--serif:"Bodoni Moda",Didot,"Times New Roman",serif;--sans:"Manrope",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;--btn:"Syne","Arial Black",system-ui,sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;color:var(--text);font-family:var(--sans);line-height:1.5;background:radial-gradient(ellipse 80% 50% at 15% 0,#3a0f22 0,transparent 60%),radial-gradient(ellipse 70% 40% at 90% 30%,#1f1030 0,transparent 60%),var(--bg);background-attachment:fixed}
+.hide{display:none!important}
+.hero{min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 22px}
+.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(2.6rem,10vw,5.6rem);line-height:1.02;margin:0;max-width:900px}
+.hero h1 em{color:var(--gold);font-style:italic}
+.hero p{color:var(--muted);max-width:460px;margin:20px 0 28px;font-size:1.05rem}
+.cta{display:inline-block;text-decoration:none;color:#1a1108;background:var(--gold);padding:15px 34px;border-radius:999px;font:italic 700 1.3rem "Cormorant Garamond",Georgia,serif;letter-spacing:.02em}
+main{max-width:1050px;margin:0 auto;padding:40px 16px 120px}
+h2.t{font-family:var(--serif);font-weight:500;font-size:2rem;text-align:center;margin:0 0 6px}
+.sub{text-align:center;color:var(--muted);margin:0 0 32px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:transform .25s,border-color .25s}
+.card:hover{transform:translateY(-4px);border-color:var(--gold)}
+.img{aspect-ratio:1/1;background-size:cover;background-position:center}
+.body{padding:16px;display:flex;flex-direction:column;gap:4px;flex:1}
+.body h3{font-family:var(--serif);font-weight:500;margin:0;font-size:1.25rem}
+.meta{color:var(--muted);font-size:.85rem}
+.price{display:flex;align-items:baseline;gap:10px;margin-top:6px}
+.old{color:var(--muted);text-decoration:line-through;font-size:.9rem}
+.new{color:var(--gold);font-weight:700;font-size:1.4rem}
+.off{background:#5a1226;color:#ffd9d9;border-radius:6px;padding:1px 7px;font-size:.78rem;font-weight:700}
+.stock{font-size:.78rem;color:#e58a8a}
+.ver{margin-top:12px;text-align:center;border:1px solid var(--gold);color:var(--gold);padding:10px;border-radius:12px;font:700 .85rem var(--btn);letter-spacing:.06em}
+.how{margin-top:56px;text-align:center}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-top:20px}
+.step{border:1px solid var(--line);border-radius:14px;padding:18px;color:var(--muted);font-size:.92rem}
+.step b{display:block;font-family:var(--serif);font-size:1.6rem;color:var(--gold);font-weight:500}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 16px 120px}
+footer a{color:var(--gold)}
+/* detalle */
+.back{background:none;border:0;color:var(--muted);font:600 .9rem var(--sans);cursor:pointer;padding:0 0 18px}
+.pd{display:grid;grid-template-columns:1.15fr 1fr;gap:34px}
+@media(max-width:760px){.pd{grid-template-columns:1fr}}
+.gal{display:flex;gap:12px}
+.thumbs{display:flex;flex-direction:column;gap:10px}
+.thumbs img{width:64px;height:64px;object-fit:cover;border-radius:10px;border:2px solid var(--line);cursor:pointer}
+.thumbs img.on{border-color:var(--gold)}
+.zoom{position:relative;flex:1;aspect-ratio:1/1;border-radius:16px;border:1px solid var(--line);background-size:cover;background-position:center;cursor:zoom-in;overflow:hidden;touch-action:pan-y}
+.zoom.z{background-size:260%;cursor:zoom-out}
+.lupa{position:absolute;right:10px;bottom:10px;background:rgba(0,0,0,.65);padding:5px 11px;border-radius:999px;font-size:.78rem;pointer-events:none}
+.zoom.z .lupa{display:none}
+.info h1{font-family:var(--serif);font-weight:500;font-size:2.2rem;margin:0 0 4px}
+.info .price{margin:14px 0}
+.info .new{font-size:2rem}
+.lbl{display:flex;justify-content:space-between;align-items:center;margin:22px 0 10px;font-weight:700;font-size:.9rem}
+.lbl button{background:none;border:0;color:var(--gold);text-decoration:underline;cursor:pointer;font:600 .85rem var(--sans)}
+.sizes{display:flex;flex-wrap:wrap;gap:8px}
+.sz{min-width:52px;padding:11px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);font:700 .95rem var(--sans);cursor:pointer}
+.sz.on{border-color:var(--gold);background:var(--gold);color:#1a1108}
+.sz:disabled{opacity:.35;text-decoration:line-through;cursor:not-allowed}
+.addp{display:block;width:100%;margin-top:24px;border:0;border-radius:14px;padding:16px;background:var(--gold);color:#1a1108;font:800 1rem var(--btn);letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.perks{margin:22px 0 0;padding:0;list-style:none;color:var(--muted);font-size:.9rem;display:grid;gap:6px}
+/* carrito */
+.fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:20;background:var(--gold);color:#1a1108;border:0;border-radius:999px;padding:14px 24px;font:italic 700 1.25rem "Cormorant Garamond",Georgia,serif;letter-spacing:.02em;cursor:pointer;box-shadow:0 8px 30px rgba(0,0,0,.6)}
+.fab span{background:#1a1108;color:var(--gold);border-radius:999px;padding:2px 9px;margin-left:8px;font-size:.8rem}
+.shade{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:30;display:none}
+body.open .shade,body.tabla .shade{display:block}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:#120c10;border-left:1px solid var(--line);z-index:31;transform:translateX(100%);transition:transform .3s;display:flex;flex-direction:column;padding:calc(18px + env(safe-area-inset-top,0px)) 18px calc(18px + env(safe-area-inset-bottom,0px))}
+body.open .drawer{transform:none}
+.dh{display:flex;justify-content:space-between;align-items:center}
+.dh h3{font-family:var(--serif);font-weight:500;font-size:1.6rem;margin:0}
+.x{background:none;border:0;color:var(--text);font-size:1.8rem;cursor:pointer}
+.items{flex:1;overflow-y:auto;margin:14px 0}
+.empty{color:var(--muted);text-align:center;margin-top:40px}
+.it{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+.it b{display:block}.it small{color:var(--muted)}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:none;color:var(--text);cursor:pointer;font-size:1rem}
+textarea{width:100%;background:var(--card);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:10px;font:.9rem var(--sans);resize:none;margin-bottom:10px}
+.total{display:flex;justify-content:space-between;font-size:1.15rem;margin-bottom:12px}
+.total b{color:var(--gold);font-family:var(--serif);font-size:1.5rem}
+.send{display:block;width:100%;border:0;border-radius:12px;padding:13px;font:700 .95rem var(--btn);cursor:pointer;margin-top:8px;color:#fff}
+.sw{background:var(--wa)}.si{background:transparent;border:1px solid var(--gold);color:var(--text)}
+.modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(520px,92%);max-height:86vh;overflow:auto;background:#120c10;border:1px solid var(--line);border-radius:16px;padding:20px;z-index:32;display:none}
+body.tabla .modal{display:block}
+.modal h3{font-family:var(--serif);font-weight:500;font-size:1.5rem;margin:0 0 12px}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{padding:9px 6px;border-bottom:1px solid var(--line);text-align:center}
+th{color:var(--gold);font-weight:700}
+.note{color:var(--muted);font-size:.8rem;margin:12px 0 0}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--gold);color:#1a1108;padding:10px 18px;border-radius:999px;font-weight:700;font-size:.85rem;z-index:40;display:none}
+</style>
+</head>
+<body>
+<div id="home">
+  <section class="hero">
+    <h1>Lo mejor del <em>lado oscuro</em>, a precio outlet</h1>
+    <p>Piezas originales con descuento real. Pocas unidades, envíos a todo el Perú.</p>
+    <a class="cta" href="#catalogo">Ver catálogo</a>
+  </section>
+  <main id="catalogo">
+    <h2 class="t">Catálogo</h2>
+    <p class="sub">Toca un producto para ver fotos, tallas y agregarlo al carrito.</p>
+    <div class="grid" id="grid"></div>
+  </main>
+</div>
+
+<main id="detail" class="hide"></main>
+<footer>Síguenos en <a id="footIg" target="_blank" rel="noopener" href="#">@mundoscuro.outlet</a></footer>
+
+<button class="fab" id="fab">Carrito<span id="count">0</span></button>
+<div class="shade" id="shade"></div>
+<aside class="drawer">
+  <div class="dh"><h3>Tu pedido</h3><button class="x" id="close">×</button></div>
+  <div class="items" id="items"></div>
+  <textarea id="nota" rows="2" placeholder="Notas: color, distrito de envío…"></textarea>
+  <div class="total"><span>Total</span><b id="total">S/ 0</b></div>
+  <button class="send sw" id="sendWa">Enviar pedido por WhatsApp</button>
+  <button class="send si" id="sendIg">Enviar pedido por Instagram</button>
+</aside>
+<div class="modal" id="modal"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ====== EDITA AQUÍ ======
+var WHATSAPP = "51999999999"; // tu número con 51 delante, sin + ni espacios
+var INSTAGRAM = "mundoscuro.outlet";
+// tipo: "calzado", "ropa" o "unico". imagenes: déjalo vacío hasta tener fotos reales.
+var PRODUCTOS = [
+  {id:1,nombre:"Producto 1",detalle:"Marca · Zapatillas",normal:199,outlet:99,stock:"Quedan pocas unidades",icono:"👟",tipo:"calzado",tallas:["38","39","40","41","42","43"],agotadas:["40"],imagenes:[]},
+  {id:2,nombre:"Producto 2",detalle:"Marca · Polo",normal:149,outlet:79,stock:"Quedan 3 unidades",icono:"👕",tipo:"ropa",tallas:["S","M","L","XL"],agotadas:["XL"],imagenes:[]},
+  {id:3,nombre:"Producto 3",detalle:"Marca · Casaca",normal:249,outlet:129,stock:"Últimas unidades",icono:"🧥",tipo:"ropa",tallas:["S","M","L","XL"],agotadas:[],imagenes:[]},
+  {id:4,nombre:"Producto 4",detalle:"Marca · Mochila",normal:89,outlet:45,stock:"Quedan 5 unidades",icono:"🎒",tipo:"unico",tallas:["Única"],agotadas:[],imagenes:[]}
+];
+var TABLA_ROPA = [["S","88–94","34.6–37.0"],["M","94–102","37.0–40.2"],["L","102–110","40.2–43.3"],["XL","110–118","43.3–46.5"]];
+var TABLA_CALZADO = [["38","24.0","9.4"],["39","24.6","9.7"],["40","25.3","10.0"],["41","26.0","10.2"],["42","26.6","10.5"],["43","27.3","10.7"]];
+// ========================
+var cart = {}, sel = null, cur = null;
+var $ = function(i){return document.getElementById(i)};
+function find(id){return PRODUCTOS.filter(function(p){return p.id==id})[0]}
+function toast(t){var e=$("toast");e.textContent=t;e.style.display="block";setTimeout(function(){e.style.display="none"},2200)}
+var PAL=[["3a0f22","0e0a10"],["1f1030","0e0a10"],["2a1a10","0e0a10"],["102a2a","0e0a10"]];
+function foto(p,n){
+  if(p.imagenes[n]) return p.imagenes[n];
+  var c=PAL[(p.id+n)%4];
+  var s='<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#'+c[0]+'"/><stop offset="1" stop-color="#'+c[1]+'"/></linearGradient></defs><rect width="900" height="900" fill="url(#g)"/><text x="450" y="540" font-size="300" text-anchor="middle">'+p.icono+'</text><text x="450" y="840" font-size="34" fill="#a8979a" text-anchor="middle" font-family="sans-serif">Foto '+(n+1)+' (ejemplo)</text></svg>';
+  return "data:image/svg+xml;utf8,"+encodeURIComponent(s);
+}
+function nFotos(p){return Math.max(p.imagenes.length,3)}
+function css(u){return 'url("'+u+'")'}
+function pct(p){return Math.round((1-p.outlet/p.normal)*100)}
+
+// catálogo
+PRODUCTOS.forEach(function(p){
+  var c=document.createElement("div");c.className="card";
+  c.innerHTML='<div class="img" style=\'background-image:'+css(foto(p,0))+'\'></div><div class="body"><h3>'+p.nombre+'</h3><div class="meta">'+p.detalle+'</div><div class="price"><span class="old">S/ '+p.normal+'</span><span class="new">S/ '+p.outlet+'</span><span class="off">-'+pct(p)+'%</span></div><div class="stock">'+p.stock+'</div><div class="ver">VER PRODUCTO</div></div>';
+  c.onclick=function(){location.hash="producto-"+p.id};
+  $("grid").appendChild(c);
+});
+
+// detalle
+function detalle(p){
+  cur=p;sel=p.tipo==="unico"?"Única":null;
+  var th="",i;
+  for(i=0;i<nFotos(p);i++) th+='<img data-i="'+i+'" class="'+(i?'':'on')+'" src="'+foto(p,i)+'" alt="Foto '+(i+1)+'">';
+  var sz=p.tallas.map(function(t){var ag=p.agotadas.indexOf(t)>-1;return '<button class="sz'+(t===sel?' on':'')+'" data-t="'+t+'"'+(ag?' disabled':'')+'>'+t+'</button>'}).join("");
+  $("detail").innerHTML='<button class="back" id="back">← Volver al catálogo</button><div class="pd"><div class="gal"><div class="thumbs" id="thumbs">'+th+'</div><div class="zoom" id="zoom" style=\'background-image:'+css(foto(p,0))+'\'><span class="lupa">🔍 Pasa el cursor para ampliar</span></div></div><div class="info"><h1>'+p.nombre+'</h1><div class="meta">'+p.detalle+'</div><div class="price"><span class="old">S/ '+p.normal+'</span><span class="new">S/ '+p.outlet+'</span><span class="off">-'+pct(p)+'%</span></div><div class="stock">'+p.stock+'</div>'+
+   (p.tipo==="unico"?'':'<div class="lbl"><span>Talla</span><button id="tabla">Ver tabla de tallas</button></div><div class="sizes" id="sizes">'+sz+'</div>')+
+   '<button class="addp" id="addp">Agregar al carrito</button></div></div>';
+  $("back").onclick=function(){location.hash="catalogo"};
+  $("thumbs").onclick=function(e){var n=e.target.getAttribute("data-i");if(n===null)return;
+    [].forEach.call($("thumbs").children,function(x){x.classList.remove("on")});e.target.classList.add("on");
+    $("zoom").style.backgroundImage=css(foto(p,+n));$("zoom").classList.remove("z")};
+  var z=$("zoom");
+  function pos(e){var r=z.getBoundingClientRect();z.style.backgroundPosition=((e.clientX-r.left)/r.width*100)+"% "+((e.clientY-r.top)/r.height*100)+"%"}
+  z.addEventListener("pointerenter",function(e){if(e.pointerType==="mouse"){z.classList.add("z");pos(e)}});
+  z.addEventListener("pointermove",function(e){if(z.classList.contains("z"))pos(e)});
+  z.addEventListener("pointerleave",function(e){if(e.pointerType==="mouse"){z.classList.remove("z");z.style.backgroundPosition="center"}});
+  z.addEventListener("click",function(e){if(e.pointerType==="mouse")return;if(z.classList.contains("z")){z.classList.remove("z");z.style.backgroundPosition="center"}else{z.classList.add("z");pos(e)}});
+  if($("sizes"))$("sizes").onclick=function(e){var t=e.target.getAttribute("data-t");if(!t||e.target.disabled)return;sel=t;[].forEach.call($("sizes").children,function(b){b.classList.toggle("on",b.getAttribute("data-t")===t)})};
+  if($("tabla"))$("tabla").onclick=function(){abrirTabla(p)};
+  $("addp").onclick=function(){
+    if(!sel){toast("Elige una talla primero");return}
+    var k=p.id+"|"+sel;cart[k]=(cart[k]||0)+1;render();toast("Agregado al carrito")};
+}
+function abrirTabla(p){
+  var h;
+  if(p.tipo==="calzado"){h='<h3>Tabla de tallas · Calzado</h3><table><tr><th>Talla</th><th>Pie (cm)</th><th>Pie (pulgadas)</th></tr>'+TABLA_CALZADO.map(function(r){return '<tr><td>'+r.join('</td><td>')+'</td></tr>'}).join("")+'</table><p class="note">Mide tu pie de talón a punta del dedo más largo.</p>'}
+  else{h='<h3>Tabla de tallas · Ropa</h3><table><tr><th>Talla</th><th>Pecho (cm)</th><th>Pecho (pulgadas)</th></tr>'+TABLA_ROPA.map(function(r){return '<tr><td>'+r.join('</td><td>')+'</td></tr>'}).join("")+'</table><p class="note">Mide el contorno de tu pecho a la altura de las axilas.</p>'}
+  $("modal").innerHTML=h+'<p class="note">Medidas referenciales, pueden variar según la marca.</p><button class="send si" id="mc">Cerrar</button>';
+  document.body.classList.add("tabla");$("mc").onclick=cerrar;
+}
+function cerrar(){document.body.classList.remove("open","tabla")}
+
+// rutas con #
+function ruta(){
+  var m=/^#producto-(\d+)$/.exec(location.hash),p=m&&find(m[1]);
+  if(p){$("home").classList.add("hide");$("detail").classList.remove("hide");detalle(p);window.scrollTo(0,0)}
+  else{$("detail").classList.add("hide");$("home").classList.remove("hide")}
+}
+window.addEventListener("hashchange",ruta);
+
+// carrito
+function render(){
+  var n=0,tot=0,h="";
+  Object.keys(cart).forEach(function(k){
+    var a=k.split("|"),p=find(a[0]),q=cart[k];n+=q;tot+=q*p.outlet;
+    h+='<div class="it"><div><b>'+p.nombre+'</b><small>'+p.detalle+(a[1]!=="Única"?' · Talla '+a[1]:'')+' · S/ '+p.outlet+'</small></div><div class="qty"><button data-m="'+k+'">−</button>'+q+'<button data-p="'+k+'">+</button></div></div>';
+  });
+  $("items").innerHTML=h||'<div class="empty">Tu carrito está vacío</div>';
+  $("count").textContent=n;$("total").textContent="S/ "+tot;
+}
+function pedido(){
+  var l="Hola, quiero hacer este pedido:\n",tot=0;
+  Object.keys(cart).forEach(function(k){var a=k.split("|"),p=find(a[0]),q=cart[k];tot+=q*p.outlet;l+="• "+q+" x "+p.nombre+(a[1]!=="Única"?" (talla "+a[1]+")":"")+" - S/ "+(q*p.outlet)+"\n"});
+  l+="Total: S/ "+tot;
+  var nota=$("nota").value.trim();if(nota)l+="\nNotas: "+nota;
+  return l;
+}
+document.addEventListener("click",function(e){
+  var t=e.target;
+  if(t.hasAttribute("data-p")){cart[t.getAttribute("data-p")]++;render()}
+  if(t.hasAttribute("data-m")){var k=t.getAttribute("data-m");cart[k]--;if(cart[k]<=0)delete cart[k];render()}
+});
+$("fab").onclick=function(){document.body.classList.add("open")};
+$("close").onclick=$("shade").onclick=cerrar;
+$("sendWa").onclick=function(){
+  if(!Object.keys(cart).length){toast("Agrega un producto primero");return}
+  window.open("https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(pedido()),"_blank")};
+$("sendIg").onclick=function(){
+  if(!Object.keys(cart).length){toast("Agrega un producto primero");return}
+  try{navigator.clipboard.writeText(pedido());toast("Pedido copiado: pégalo en el chat")}catch(err){toast("Escríbenos tu pedido en el chat")}
+  setTimeout(function(){window.open("https://www.instagram.com/"+INSTAGRAM+"/","_blank")},900)};
+$("footIg").href="https://www.instagram.com/"+INSTAGRAM+"/";
+render();ruta();
+</script>
+</body>
+</html>
